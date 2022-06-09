@@ -13,6 +13,14 @@ void quick_sort(int *array, size_t size)
 	quick_sort_helper(array, size, 0, size - 1);
 }
 
+/**
+ * quick_sort_helper - Helper function for quick_sort
+ *
+ * @array: Array of integers
+ * @size: Size of the array
+ * @left: Start index
+ * @right: End index
+ */
 void quick_sort_helper(int *array, size_t size, int left, int right)
 {
 	int pivot;
@@ -25,6 +33,15 @@ void quick_sort_helper(int *array, size_t size, int left, int right)
 	}
 }
 
+/**
+ * partition - Partitions the array
+ *
+ * @array: Array of integers
+ * @size: Size of the array
+ * @left: Index of the first element
+ * @right: Index of the second element
+ * Return: Index of i
+ */
 int partition(int *array, size_t size, int left, int right)
 {
 	int pivot = array[right];
@@ -46,6 +63,13 @@ int partition(int *array, size_t size, int left, int right)
 	return (i + 1);
 }
 
+/**
+ * swap - Swaps two elements of an array
+ *
+ * @array: Array of integers
+ * @left: Index of the first element
+ * @right: Index of the second element
+ */
 void swap(int *array, int left, int right)
 {
 	int temp = array[left];

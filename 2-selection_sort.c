@@ -2,9 +2,8 @@
 
 /**
  * selection_sort - Sorts an array of integers in ascending order
- *
- * @param array
- * @param size
+ * @array: Array of integers
+ * @size: Size of the array
  */
 void selection_sort(int *array, size_t size)
 {
