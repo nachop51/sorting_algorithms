@@ -48,21 +48,20 @@ int partition(int *array, size_t size, int left, int right)
 	int pivot = array[right];
 	int i = left - 1;
 	int j = right + 1;
+
 	while (1)
 	{
-		do
-		{
+		do {
 			i++;
 		} while (array[i] < pivot);
 
-		do
-		{
+		do {
 			j--;
 		} while (array[j] > pivot);
 
 		if (i >= j)
 		{
-			return i;
+			return (i);
 		}
 
 		swap(array, i, j);
