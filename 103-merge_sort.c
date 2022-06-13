@@ -7,64 +7,94 @@
  */
 void merge_sort(int *array, size_t size)
 {
+	int *helper;
+
 	if (!array || size < 2)
 		return;
-
-	merge_sort_helper(array, 0, size - 1);
+	helper = malloc(sizeof(int) * size);
+	if (!helper)
+		return;
+	copy_array(array, 0, size, helper);
+	merge_sort_helper(helper, 0, size, array);
 }
 
-void merge_sort_helper(int *array, int left, int right)
+/**
+ * merge_sort_helper - Sorts an array of integers in ascending order
+ * @helper: Array of integers
+ * @left: Left index of the array
+ * @right: Right index of the array
+ * @array: Array of integers
+ */
+void merge_sort_helper(int helper[], int left, int right, int array[])
 {
-	int mid = (right - left) / 2;
+	int mid;
 
 	if (right - left <= 1)
 		return;
-
-	merge_sort_helper(array, left, mid);
-	merge_sort_helper(array, mid, right);
-	merge_sorted_arrays(array, left, mid, right);
+	mid = (right + left) / 2;
+	merge_sort_helper(array, left, mid, helper);
+	merge_sort_helper(array, mid, right, helper);
+	merge_sorted_arrays(helper, left, mid, right, array);
 }
 
-void merge_sorted_arrays(int *array, int left, int mid, int right)
+/**
+ * merge_sorted_arrays - Merges two sorted arrays into one
+ * @array: Array of integers
+ * @left: Left index of the array
+ * @mid: Middle index of the array
+ * @right: Right index of the array
+ * @h: Array of integers
+ */
+void merge_sorted_arrays(int array[], int left, int mid, int right, int h[])
 {
-	int left_length = mid - left, right_length = right - mid + 1;
-	int l, r, temp, k, j;
-	int *temp_array;
-
-	temp_array = malloc(sizeof(int) * (left_length + right_length));
-	if (!temp_array)
-		return;
+	int i = left, j = mid, k;
 
 	printf("Merging...\n[left]: ");
-	for (l = 0; l < left_length; l++)
+	for (k = left; k < mid; k++)
 	{
-		if (l)
+		if (k != left)
 			printf(", ");
-		temp_array[l] = array[left + l];
-		printf("%d", temp_array[l]);
+		printf("%d", array[k]);
 	}
-	temp = l;
 	printf("\n[right]: ");
-	for (r = l, j = 0; r < left_length + right_length; r++, j++)
+	for (k = mid; k < right; k++)
 	{
-		if (r != temp)
+		if (k != mid)
 			printf(", ");
-		temp_array[l + j] = array[left + l + j];
-		printf("%d", temp_array[l + j]);
+		printf("%d", array[k]);
 	}
-	for (l = 0, r = temp, k = left; k <= right; k++)
+	printf("\n[Done]: ");
+	for (k = left; k < right; k++)
 	{
-		if ((l < left_length) && ((r - temp >= right_length) || (temp_array[l] <= temp_array[r])))
+		if (k != left)
+			printf(", ");
+		if (i < mid && (j >= right || array[i] <= array[j]))
 		{
-			array[k] = temp_array[l];
-			l++;
+			h[k] = array[i];
+			i = i + 1;
 		}
 		else
 		{
-			array[k] = temp_array[r];
-			r++;
+			h[k] = array[j];
+			j = j + 1;
 		}
+		printf("%d", h[k]);
 	}
-	printf("\n[Done]: "), print_array(array, 10);
-	free(temp_array);
+	putchar(10);
+}
+
+/**
+ * copy_array - Copies an array to another array
+ *
+ * @array: Array to copy
+ * @start: Start index of the array
+ * @end: End index of the array
+ * @helper: Array to copy to
+ */
+void copy_array(int *array, int start, int end, int *helper)
+{
+	int i;
+
+	for (i = start; i < end; i++)
+		helper[i] = array[i];
 }

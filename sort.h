@@ -37,7 +37,8 @@ int partition(int *array, size_t size, int left, int right);
 void swap(int *array, int left, int right);
 void shell_sort(int *array, size_t size);
 void merge_sort(int *array, size_t size);
-void merge_sort_helper(int *array, int left, int right);
-void merge_sorted_arrays(int *array, int left, int mid, int right);
+void merge_sort_helper(int *array, int left, int right, int *helper);
+void merge_sorted_arrays(int *array, int left, int mid, int right, int *array);
+void copy_array(int *array, int start, int end, int *helper);
 
 #endif
