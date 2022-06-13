@@ -16,6 +16,7 @@ void merge_sort(int *array, size_t size)
 		return;
 	copy_array(array, 0, size, helper);
 	merge_sort_helper(helper, 0, size, array);
+	free(helper);
 }
 
 /**
@@ -80,7 +81,7 @@ void merge_sorted_arrays(int array[], int left, int mid, int right, int h[])
 		}
 		printf("%d", h[k]);
 	}
-	putchar(10);
+	printf("\n");
 }
 
 /**
