@@ -40,5 +40,7 @@ void merge_sort(int *array, size_t size);
 void merge_sort_helper(int *array, int left, int right, int *helper);
 void merge_sorted_arrays(int *array, int left, int mid, int right, int *h);
 void copy_array(int *array, int start, int end, int *helper);
+void counting_sort(int *array, size_t size);
+void radix_sort(int *array, size_t size);
 
 #endif
